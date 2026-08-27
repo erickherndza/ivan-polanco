@@ -1,0 +1,106 @@
+/* Panel de administración — extiende style.css */
+
+body.admin-login-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-navy);
+  padding: 24px;
+}
+.admin-login-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 40px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+.admin-login-logo { height: 46px; width: auto; margin: 0 auto 20px; }
+.admin-login-card h1 { font-size: 20px; margin-bottom: 4px; }
+.admin-login-card .hint { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; }
+.admin-login-card .form-field { text-align: left; margin-bottom: 16px; }
+
+body.admin-body { background: var(--surface-alt); min-height: 100vh; }
+
+.admin-topbar { background: var(--white); border-bottom: 1px solid var(--gray-border); }
+.admin-topbar-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--navy); font-family: "Poppins", sans-serif; }
+.admin-brand-icon { width: 28px; height: auto; }
+.admin-topbar-actions { display: flex; align-items: center; gap: 14px; }
+.admin-username { font-size: 13px; color: var(--text-secondary); }
+
+.admin-main { max-width: 1000px; margin: 0 auto; padding: 28px 24px 60px; display: flex; flex-direction: column; gap: 20px; }
+
+.admin-card {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gray-border);
+  padding: 24px;
+}
+.google-card { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.google-card-info h2 { font-size: 16px; margin-bottom: 4px; }
+.google-card-actions { display: flex; gap: 10px; }
+.btn-danger { color: #9B2C2C; border-color: #F3B9B9; }
+.btn-danger:hover { background: #FDECEC; }
+
+.admin-filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.filter-btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--gray-border);
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.filter-btn.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+.appt-row { border: 1px solid var(--gray-border); border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; }
+.appt-main { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.appt-when { min-width: 130px; }
+.appt-when strong { display: block; font-size: 13px; color: var(--navy); }
+.appt-when span { display: block; font-size: 12px; color: var(--text-secondary); }
+.appt-patient { flex: 1; min-width: 200px; }
+.appt-patient strong { display: block; font-size: 14px; color: var(--text); }
+.appt-patient span { display: block; font-size: 12px; color: var(--text-secondary); }
+.appt-status {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+}
+.appt-status.confirmed { background: #E4F6EE; color: #1E7A4C; }
+.appt-status.cancelled { background: #FDECEC; color: #9B2C2C; }
+.appt-actions { display: flex; gap: 8px; }
+.appt-actions .btn { padding: 8px 14px; font-size: 13px; }
+
+.appt-reschedule-panel {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--gray-border);
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.appt-reschedule-panel .form-field { margin-bottom: 0; }
+.appt-reschedule-actions { display: flex; gap: 8px; }
+
+@media (max-width: 640px) {
+  .appt-main { align-items: flex-start; }
+  .appt-actions { width: 100%; }
+}

@@ -1,0 +1,46 @@
+<?php
+// Copiar este archivo a config.php (mismo directorio) y completar con los valores
+// reales. api/config.php NUNCA debe subirse al control de versiones (ver .gitignore).
+
+return [
+    // URL pública del sitio, sin slash final. Ej: https://ivanpolancoendodoncia.com
+    'app_url' => 'https://tu-dominio.com',
+
+    'google' => [
+        // Del proyecto en Google Cloud Console (ver guía de configuración).
+        'client_id' => 'TU_CLIENT_ID.apps.googleusercontent.com',
+        'client_secret' => 'TU_CLIENT_SECRET',
+        // Debe coincidir EXACTO con el URI de redireccionamiento autorizado en Google Cloud.
+        'redirect_uri' => 'https://tu-dominio.com/api/google/callback.php',
+    ],
+
+    'smtp' => [
+        'host' => 'mail.tu-dominio.com',
+        'port' => 465,
+        'secure' => 'ssl', // 'ssl' o 'tls'
+        'username' => 'citas@tu-dominio.com',
+        'password' => 'TU_PASSWORD_SMTP',
+        'from_email' => 'citas@tu-dominio.com',
+        'from_name' => 'Dr. Iván Polanco - Citas',
+    ],
+
+    'clinic' => [
+        'name' => 'Dr. Iván Gilberto Polanco Grullón',
+        // A quién avisar cuando entra una cita nueva.
+        'notify_email' => 'dr.ivanpolanco059@gmail.com',
+        'timezone' => 'America/Santo_Domingo',
+        'appointment_duration_minutes' => 45,
+        // Horario de atención por día. 0=domingo ... 6=sábado. Editar según confirme el doctor.
+        'business_hours' => [
+            1 => ['09:00', '17:00'],
+            2 => ['09:00', '17:00'],
+            3 => ['09:00', '17:00'],
+            4 => ['09:00', '17:00'],
+            5 => ['09:00', '17:00'],
+        ],
+    ],
+
+    // Token secreto para disparar cron/send_reminders.php por URL (si el hosting no
+    // permite cron real por línea de comandos). Cambiar por un valor aleatorio largo.
+    'cron_secret' => 'CAMBIA_ESTE_VALOR_POR_ALGO_ALEATORIO',
+];

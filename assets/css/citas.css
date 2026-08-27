@@ -1,0 +1,143 @@
+/* Sistema de citas — extiende style.css (misma paleta y componentes). */
+
+.page-header {
+  background: var(--gradient-navy);
+  padding: 170px 0 64px;
+  color: var(--white);
+  text-align: center;
+}
+.page-header h1 { color: var(--white); font-size: clamp(28px, 3.4vw, 40px); }
+.page-header p { color: rgba(255,255,255,.75); max-width: 520px; margin: 0 auto; }
+
+.booking-section { background: var(--surface-alt); padding: 64px 0 100px; }
+.booking-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-border);
+  padding: 36px;
+}
+
+.booking-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.booking-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.booking-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--surface-alt);
+  border: 1px solid var(--gray-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.booking-step.active .booking-step-num { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.booking-step.active { color: var(--navy); }
+.booking-step.done .booking-step-num { background: var(--turquoise-dark); border-color: var(--turquoise-dark); color: var(--white); }
+.booking-step-line { flex: 1; height: 1px; background: var(--gray-border); }
+
+.booking-card h2 { font-size: 20px; margin-bottom: 6px; }
+.booking-card > p.hint { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; }
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+.slot-btn {
+  padding: 11px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--gray-border);
+  background: var(--surface-alt);
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.slot-btn:hover { border-color: var(--turquoise-dark); }
+.slot-btn.selected { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.slots-empty, .slots-loading {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 20px 0;
+  text-align: center;
+}
+
+.booking-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface-alt);
+  border: 1px solid var(--gray-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 22px;
+  font-size: 14px;
+}
+.booking-summary svg { width: 20px; height: 20px; stroke: var(--turquoise-dark); flex-shrink: 0; }
+.booking-summary strong { color: var(--navy); }
+.booking-summary button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--turquoise-dark);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.booking-success {
+  text-align: center;
+  padding: 20px 0;
+}
+.booking-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+.booking-success-icon svg { width: 30px; height: 30px; stroke: var(--white); }
+.booking-success h2 { margin-bottom: 10px; }
+
+.form-error {
+  background: #FDECEC;
+  border: 1px solid #F3B9B9;
+  color: #9B2C2C;
+  font-size: 13px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  display: none;
+}
+.form-error.visible { display: block; }
+
+.booking-actions { display: flex; gap: 12px; margin-top: 22px; }
+.booking-actions .btn-secondary { flex: 1; }
+.booking-actions .btn-primary { flex: 2; }
+
+@media (max-width: 600px) {
+  .booking-card { padding: 24px 20px; }
+  .booking-step span.label { display: none; }
+}

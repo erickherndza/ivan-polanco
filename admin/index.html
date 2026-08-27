@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de citas — Dr. Iván Polanco</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+<link rel="icon" type="image/png" href="../assets/img/icono.png">
+</head>
+<body class="admin-body">
+
+<header class="admin-topbar">
+  <div class="admin-topbar-inner">
+    <div class="admin-brand">
+      <img src="../assets/img/icono.png" alt="" class="admin-brand-icon">
+      <span>Panel de citas</span>
+    </div>
+    <div class="admin-topbar-actions">
+      <span id="admin-username" class="admin-username"></span>
+      <button type="button" id="logout-btn" class="btn btn-secondary">Salir</button>
+    </div>
+  </div>
+</header>
+
+<main class="admin-main">
+
+  <section class="admin-card google-card">
+    <div class="google-card-info">
+      <h2>Cuenta de Google Calendar</h2>
+      <p id="google-status-text" class="hint">Verificando conexión…</p>
+    </div>
+    <div class="google-card-actions">
+      <a href="../api/google/connect.php" class="btn btn-secondary" id="google-connect-btn">Conectar / cambiar cuenta</a>
+      <button type="button" class="btn btn-secondary btn-danger" id="google-disconnect-btn" style="display:none;">Desconectar</button>
+    </div>
+  </section>
+
+  <section class="admin-card">
+    <div class="admin-filters" id="appt-filters">
+      <button type="button" class="filter-btn active" data-filter="upcoming">Próximas</button>
+      <button type="button" class="filter-btn" data-filter="past">Pasadas</button>
+      <button type="button" class="filter-btn" data-filter="cancelled">Canceladas</button>
+      <button type="button" class="filter-btn" data-filter="all">Todas</button>
+    </div>
+
+    <div id="appt-error" class="form-error"></div>
+    <div id="appt-list">
+      <p class="hint">Cargando citas…</p>
+    </div>
+  </section>
+
+</main>
+
+<template id="appt-row-template">
+  <div class="appt-row">
+    <div class="appt-main">
+      <div class="appt-when">
+        <strong class="appt-date"></strong>
+        <span class="appt-time"></span>
+      </div>
+      <div class="appt-patient">
+        <strong class="appt-name"></strong>
+        <span class="appt-contact"></span>
+        <span class="appt-motivo"></span>
+      </div>
+      <span class="appt-status"></span>
+      <div class="appt-actions">
+        <button type="button" class="btn btn-secondary appt-reschedule-btn">Reagendar</button>
+        <button type="button" class="btn btn-secondary btn-danger appt-cancel-btn">Cancelar</button>
+      </div>
+    </div>
+    <div class="appt-reschedule-panel" style="display:none;">
+      <div class="form-field">
+        <label>Nueva fecha</label>
+        <input type="date" class="reschedule-date">
+      </div>
+      <div class="form-field">
+        <label>Nueva hora</label>
+        <input type="time" class="reschedule-time">
+      </div>
+      <div class="appt-reschedule-actions">
+        <button type="button" class="btn btn-secondary reschedule-cancel-btn">Cancelar</button>
+        <button type="button" class="btn btn-primary reschedule-confirm-btn">Guardar cambio</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script src="../assets/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+api/config.php
+api/vendor/
+storage/citas.sqlite
+storage/logs/*.log
+storage/rate/*.json
+.DS_Store
