@@ -43,7 +43,7 @@ h1, h2, h3, h4 {
   margin: 0 0 .5em;
   line-height: 1.16;
   font-weight: 700;
-  letter-spacing: -.01em;
+  letter-spacing: -.02em;
 }
 .fade { color: var(--navy-soft); }
 .hero .fade, .diagnostic-band .fade { color: rgba(255,255,255,.5); }
@@ -129,7 +129,7 @@ section { padding: 100px 0; position: relative; }
   font-size: 15px;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  transition: transform .3s ease-in-out, box-shadow .3s ease-in-out, background .3s ease-in-out;
   white-space: nowrap;
 }
 .btn:hover { transform: translateY(-2px); }
@@ -141,7 +141,9 @@ section { padding: 100px 0; position: relative; }
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform .3s ease-in-out;
 }
+.btn:hover .btn-icon { transform: translateX(4px); }
 .btn-icon svg { width: 16px; height: 16px; }
 .btn-primary { background: var(--navy); color: var(--white); box-shadow: var(--shadow-soft); }
 .btn-primary .btn-icon { background: var(--turquoise-dark); }
@@ -164,9 +166,10 @@ section { padding: 100px 0; position: relative; }
   left: 0;
   right: 0;
   z-index: 100;
-  transition: top .25s ease;
+  transition: top .25s ease, transform .35s ease-in-out;
 }
 .site-header.is-fixed { position: fixed; top: 14px; }
+.site-header.header-hidden { transform: translateY(-140%); }
 .header-inner {
   background: var(--white);
   border-radius: 999px;
@@ -336,7 +339,9 @@ section { padding: 100px 0; position: relative; }
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow);
+  transition: transform .6s ease-in-out;
 }
+.about-media:hover .about-photo { transform: scale(1.03); }
 .about-photo-note {
   position: absolute;
   top: 18px;
@@ -414,7 +419,9 @@ section { padding: 100px 0; position: relative; }
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform .4s ease-in-out;
 }
+.service-card:hover .service-icon { transform: rotate(-6deg) scale(1.08); }
 .service-icon svg { width: 26px; height: 26px; stroke: var(--white); }
 .service-card h3 { font-size: 18px; margin-bottom: 8px; }
 .service-card p { font-size: 14px; margin-bottom: 0; }
@@ -430,7 +437,9 @@ section { padding: 100px 0; position: relative; }
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   display: block;
+  transition: transform .6s ease-in-out;
 }
+.why-media:hover .why-photo { transform: scale(1.04); }
 .why-media .float-card { position: absolute; bottom: -22px; left: -22px; right: auto; }
 .why-copy { order: 1; }
 .why-list { display: flex; flex-direction: column; gap: 24px; margin-top: 30px; }
@@ -811,7 +820,20 @@ section { padding: 100px 0; position: relative; }
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .whatsapp-fab:hover { transform: scale(1.08); box-shadow: 0 16px 32px -8px rgba(1, 34, 48, .5); }
-.whatsapp-fab svg { width: 30px; height: 30px; }
+.whatsapp-fab svg { width: 30px; height: 30px; position: relative; z-index: 1; }
+.whatsapp-fab::before, .whatsapp-fab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #25D366;
+  animation: whatsapp-pulse 2.4s ease-out infinite;
+}
+.whatsapp-fab::after { animation-delay: 1.2s; }
+@keyframes whatsapp-pulse {
+  0% { transform: scale(1); opacity: .55; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
 
 @media (max-width: 720px) {
   .whatsapp-fab { width: 52px; height: 52px; bottom: 18px; right: 18px; }

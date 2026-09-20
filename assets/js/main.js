@@ -1,16 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
   var header = document.getElementById("site-header");
+  var nav = document.querySelector(".main-nav");
   if (header) {
+    var lastScrollY = window.scrollY;
     var onScroll = function () {
-      if (window.scrollY > 40) header.classList.add("is-fixed");
+      var y = window.scrollY;
+      if (y > 40) header.classList.add("is-fixed");
       else header.classList.remove("is-fixed");
+
+      var navOpen = nav && nav.classList.contains("open");
+      if (!navOpen && y > 220 && y > lastScrollY + 4) {
+        header.classList.add("header-hidden");
+      } else if (y < lastScrollY - 4 || y <= 220) {
+        header.classList.remove("header-hidden");
+      }
+      lastScrollY = y;
     };
     window.addEventListener("scroll", onScroll);
     onScroll();
   }
 
   var toggle = document.querySelector(".nav-toggle");
-  var nav = document.querySelector(".main-nav");
 
   if (toggle && nav) {
     toggle.addEventListener("click", function () {
