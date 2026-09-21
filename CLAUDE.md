@@ -64,12 +64,13 @@ assets/css/style.css          ← Sistema de diseño base (variables, botones, h
 assets/css/citas.css          ← Extiende style.css: booking card, slots, pasos
 assets/css/pago.css           ← Extiende style.css: tarjetas de banco, copy buttons
 assets/css/admin.css          ← Extiende style.css: panel de administración
-assets/js/main.js             ← Header sticky, nav móvil, FAQ accordion, reveal-on-scroll
+assets/js/main.js             ← Header sticky (oculto al bajar scroll, reaparece al subir), nav móvil, FAQ accordion, reveal-on-scroll
 assets/js/citas.js            ← Flujo de agendamiento (fetch a api/citas/*)
 assets/js/pago.js             ← Botones de copiar al portapapeles
 assets/js/admin.js            ← Login, listado/reagendar/cancelar citas, conexión Google
 assets/img/                   ← logo.png, icono.png (reales, del cliente)
 assets/img/stock/             ← Fotos de stock (Unsplash, licencia libre) — ver §7
+                                 (incluye servicio-*.jpg: una foto por tarjeta de servicio)
 assets/img/bancos/            ← promerica.svg (logo real, CC BY-SA 4.0, ver crédito en pago.html)
 
 api/                           ← Backend PHP del sistema de citas
@@ -134,7 +135,23 @@ cuenta" para vincular o cambiar el Google Calendar sin tocar código.
   (badge/eyebrow), `.btn-primary`/`.btn-secondary`/`.btn-ghost`, `.float-card`
   (tarjetas flotantes sobre fotos), `.process-step` (pasos numerados —
   reutilizado tal cual en el tutorial de `pago.html`), `.reveal` (animación
-  fade-in al hacer scroll, vía `IntersectionObserver` en `main.js`).
+  fade-in al hacer scroll, vía `IntersectionObserver` en `main.js`),
+  `.service-card` (número pequeño + título + ícono en fila, foto del
+  tratamiento abajo con zoom al hover — patrón tomado de comparar la
+  estructura con Smilico, no de copiar su código).
+- **Radio de esquina — convención fija, no usar valores sueltos:**
+  `--radius` (20px) para cards/contenedores grandes (`.service-card`,
+  `.booking-card`, `.payment-card`, `.appointment-form`); `--radius-sm`
+  (12px) para fotos pequeñas dentro de esos contenedores (`.about-photo`,
+  `.why-photo`); `999px`/`50%` para pills, botones e íconos circulares.
+- **Micro-interacciones** (agregadas tras comparar con la referencia
+  Smilico): header se oculta al bajar el scroll y reaparece al subir; el
+  ícono de los botones se desliza al hover; íconos de servicio rotan/escalan
+  al hover de la card; fotos de servicio, doctor y "por qué elegirnos" hacen
+  zoom sutil al hover; el botón de WhatsApp tiene un anillo de pulso
+  continuo. Todas las transiciones usan `ease-in-out` (no `ease` a secas)
+  para mantener consistencia — es a propósito, no cambiarlo por curva por
+  curva sin razón.
 - **Texto "fade" (`.fade` en headings):** usa `--navy-soft` por defecto
   (para fondos claros). Sobre fondos oscuros (hero, franja de diagnóstico)
   hay que agregar el selector a la regla `.hero .fade, .diagnostic-band
@@ -143,9 +160,11 @@ cuenta" para vincular o cambiar el Google Calendar sin tocar código.
   nuevas sobre fondo oscuro).
 - **Fotos:** el sitio usa fotos de stock de Unsplash (licencia libre, sin
   atribución requerida) como placeholder en hero/doctor/franja de
-  diagnóstico — todas marcadas visualmente como "Foto ilustrativa —
-  pendiente foto real". No quitar esa etiqueta hasta tener la foto real del
-  cliente.
+  diagnóstico/tarjetas de servicio — todas marcadas visualmente como "Foto
+  ilustrativa — pendiente foto real" (o, en el caso de las 7 fotos de
+  servicios, con una nota conjunta en el encabezado de esa sección: "no
+  corresponden a procedimientos reales del consultorio"). No quitar esas
+  notas hasta tener fotos reales del cliente.
 
 ## 6. Pendientes conocidos (del cliente, no técnicos)
 
@@ -220,6 +239,24 @@ cuenta" para vincular o cambiar el Google Calendar sin tocar código.
   para Wikipedia) — no reutilizable en un sitio comercial aunque se vea
   "libre" a simple vista. Siempre revisar `extmetadata.LicenseShortName` en
   la API de Wikimedia Commons antes de reusar un archivo.
+- **Un `border-bottom` en un elemento inline dentro de un padre con
+  `display:block` se estira al ancho completo del padre**, no solo al ancho
+  del texto — pasó con `.pending` (línea punteada bajo "+X años") dentro de
+  `.trust-item strong { display: block; }`: la línea cruzaba toda la
+  columna en vez de subrayar solo el texto. Fix: `display: inline-block` en
+  el elemento que lleva el borde, para que su caja se ajuste al contenido
+  aunque el padre sea block y esté centrado con `text-align:center`.
+- **`overflow: hidden` en una sección recorta cualquier hijo que se le
+  transforme fuera de sus límites**, incluso si es un efecto de diseño
+  intencional. Pasó con `.hero-info-bar` (usa `transform: translateY(50%)`
+  para flotar mitad sobre el hero, mitad sobre la franja de stats de abajo)
+  — `.hero { overflow: hidden; }` le cortaba la mitad inferior, y se veía
+  como un bug de maquetación en el borde entre secciones. Fix: quitar el
+  `overflow: hidden` de `.hero` (no hacía falta ahí; `body` ya tiene
+  `overflow-x: hidden` como red de seguridad global). Transferible a
+  cualquier elemento con `translateY`/`translateX` que deba "asomarse"
+  fuera de su sección — revisar que ningún ancestro tenga overflow
+  recortado antes de asumir que es un bug del elemento mismo.
 
 ## 9. Verificación / testing
 
