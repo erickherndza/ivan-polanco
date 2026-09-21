@@ -240,7 +240,6 @@ section { padding: 100px 0; position: relative; }
 /* Hero */
 .hero {
   padding: 170px 0 0;
-  overflow: hidden;
   color: var(--white);
   position: relative;
   background: var(--navy-ink) url("../img/stock/hero-microscopio.jpg") center 30% / cover no-repeat;
